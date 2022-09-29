@@ -1,0 +1,120 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define TRUE 1
+#define FALSE 0
+typedef int ElemType;//将int重新声明为另一个别名用户自定义类型ElemType
+
+typedef struct Node
+{
+	ElemType data;
+	struct Node *next;
+}Node;//单链表结点的结构体，类型名为Node
+
+Node *InitList()//初始化
+{
+	Node *L=(Node *)malloc(sizeof(Node));
+	L->next=NULL;
+	return L;
+}
+
+void HeadInsert(Node *L,ElemType data)//头插法
+{
+	Node *node=(Node *)malloc(sizeof(Node));
+	node->data=data;
+	node->next=L->next;
+	L->next=node;
+}
+
+void TailInsert(Node *L,ElemType data)//尾插法
+{
+	Node *node_1=L,*node_2=NULL;
+	while(node_1->next)
+		node_1=node_1->next;
+	node_2=(Node *)malloc(sizeof(Node));//新开辟一个结点
+	node_2->data=data;
+	node_2->next=NULL;
+	node_1->next=node_2;
+}
+
+int Delete(Node *L,ElemType data)//删除一个指定的结点____方法1
+{
+	Node *precedingNode=L;
+	Node *node=L->next;
+	while(node)
+	{
+		if(node->data==data)
+		{
+			precedingNode->next=node->next;
+			free(node);
+			return TRUE;
+		}
+		precedingNode=node;
+		node=node->next;
+	}
+	return FALSE;
+}
+void DelNode(Node *L,ElemType data)//删除一个指定的结点____方法2____该算法只有头结点不能删除
+{
+	Node *preNode=L,*node=NULL;
+	while(preNode->next!=NULL && preNode->next->data!=data)//先要判断当前结点的后继结点为不为空，因为&&运算符左边为假就不用判断右边
+		preNode=preNode->next;
+	if(preNode->next==NULL)
+	{
+		printf("Without this value!\n");
+		return ;
+	}
+	node=preNode->next;//指向当前preNode指针指向结点的下一个结点
+	if(node->next==NULL)//如果要删除的结点node指向尾结点
+	{
+		preNode->next=NULL;
+		free(node);
+		return ;
+	}
+	else//否则:删除的结点node不是尾结点
+	{
+		preNode->next=node->next;
+		free(node);
+		return ;
+	}			
+}
+
+void PrintList(Node *L)//一次输出链表的结点值
+{
+	Node *node=L->next;
+	if(node==NULL)
+	{
+		printf("Link list is NULL!\nPelease enter values!\n");
+		return;//返回一个空值，在这里作用是提前结束该函数，后面的语句不执行
+	}
+	
+	while(node)
+	{
+		printf("node->data=%d\n",node->data);
+		node=node->next;
+	}
+}
+
+int main()
+{
+	Node *L=InitList();//定义性声明单链表L
+	//PrintList(L);紧接着初始化后就判断链表是否为空，以及判断链表建立的正确性
+	ElemType array[5],i,length,del;
+	printf("Pelease enter array values:\n");
+	for(i=0;i<5;i++)
+		scanf("%d",&array[i]);
+	length=sizeof(array)/sizeof(array[0]);
+	for(i=0;i<length;i++)
+		if(array[i]%2==0)
+			HeadInsert(L,array[i]);//偶数头插
+		else
+			if(array[i]%2!=0)
+				TailInsert(L,array[i]);//奇数尾插
+	printf("------------------\n");
+	PrintList(L);
+	printf("------------------\n");
+	printf("Delete value is:");
+	scanf("%d",&del);
+	DelNode(L,del);
+	PrintList(L);
+	return 0;
+}

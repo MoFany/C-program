@@ -1,0 +1,102 @@
+/*struct node
+	{
+		int len;
+		char *pk;
+	}x={2,"right"},*p=&x;
+int main()
+	{
+		int test(int &x);
+		printf("%p\n%d\n",*p->pk);
+		return 0;
+	}
+
+#include<string.h>
+int main()
+	{
+		int K;
+		char arg[]="t input output zoo oil";
+		char *p=&arg[1];
+		for(K=2;arg[K]!='\0';K++)
+			if(strcmp(&arg[K],p)>0)
+				p=&arg[K];
+		printf("%s\n",p);
+		return 0;
+	}
+int main()
+	{
+		int k,i=5;
+		float s;
+		printf("%d\n",i/2);
+		for(k=0,s=0;k<7;k++)
+			s+=k/2;
+		printf("%d,%f\n",k,s);
+		return 0;
+	}
+
+int main()
+	{
+		int x,*p;
+		p=&x;
+		if(&*p==&x)
+			{
+				printf("&*p:\t%p\n",&*p);//&*p==&x==p而&p为取指针变量p自身的地址
+				printf("&x:\t%p\n",&x);
+				printf("p:\t%p\n",p);
+			}
+		else
+			printf("Error!");
+		return 0;
+	}
+struct person
+	{
+		char name[10];
+		int age;
+	}typedef per;
+int main()
+	{
+	int c;
+	per clas[10]={"Johu",17,"Paul",19,"Mary",18,"Adam",16};
+	printf("%c\n",clas[2].name[0]);
+	printf("%d\n",c);
+	return 0;
+	}
+int main()
+{
+	int a,b,c,max;
+	printf("键盘输入三个整数!\n");
+	scanf("%d%d%d",&a,&b,&c);
+	max=a>(b>c?b:c)?a:(b>c?b:c);//---------等价---------max=a>b?(a>c?a:c):(b>c?b:c);
+	printf("Max=%d\n",max);
+	return 0;
+}
+
+
+int main()
+{
+	float sum,a=2,b=1;
+	int i;
+	sum=a/b;
+	for(i=1;i<20;i++)
+		{
+			
+			a=a+b;
+			b=a-b;
+			sum=sum+a/b;
+		}
+	printf("SUM=%.2f\n",sum);
+	return 0;
+}
+int main()//----------------------------方法2:利用Fibonacci数列进行计算
+	{
+	float a[20]={2,3},b[20]={1,2},sum;
+	int i;
+	sum=a[0]/b[0]+a[1]/b[1];
+	for(i=2;i<20;i++)
+		{
+		a[i]=a[i-2]+a[i-1];
+		b[i]=b[i-2]+b[i-1];
+		sum=sum+a[i]/b[i];
+		}
+	printf("SUM=%.2f\n",sum);
+	return 0;
+	}*/

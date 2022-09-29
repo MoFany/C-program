@@ -1,0 +1,32 @@
+#include<stdio.h>
+int main()
+	{
+	extern char enter_charater(char str[]);
+	extern void delete_charater(char str[],char ch);
+	char str[1000];	
+	delete_charater(str,enter_charater(str));
+	return 0;
+	}
+char enter_charater(char str[1000])
+	{
+	char c;
+	printf("Please enter charater string:");
+	gets(str);
+	printf("Please enter delete charater:");
+	scanf("%c",&c);
+	return(c);
+	}
+void delete_charater(char str[],char ch)
+	{
+	extern void print_charater(char str[]);
+	int i,j;	
+	for(j=i=0;str[i]!='\0';i++)
+		if(str[i]!=ch)
+			str[j++]=str[i];
+	str[j]='\0';
+	print_charater(str);
+	}
+void print_charater(char str[])
+	{
+	printf("%s\n",str);
+	}
